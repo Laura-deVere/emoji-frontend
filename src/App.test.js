@@ -7,6 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
 import LandingPage from './Components/LandingPage';
 import Nav from './Components/Nav';
+import Footer from './Components/Footer';
 
 // Configure enzyme for react 16
 Enzyme.configure({ adapter: new Adapter() })
@@ -22,6 +23,10 @@ describe('App', () => {
   });
   test('App should render `Landing page` component', () => {
     const component = wrapper.find(LandingPage);
+    expect(component.length).toBe(0);
+  });
+  test('App should render `Footer` component', () => {
+    const component = wrapper.find(Footer);
     expect(component.length).toBe(0);
   });
 })
