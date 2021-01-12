@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+// import { render, screen } from '@testing-library/react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -17,6 +17,7 @@ describe('App', () => {
   test('should render the app component', () => {
     expect(wrapper.find('div').length).toEqual(1);
   });
+  // containsMatchingElement -- whether or not the current wrapper has a node anywhere in its render tree that matches the one passed in.
   test('App should render `Nav` component', () => {
     expect(wrapper.containsMatchingElement(<Nav />)).toEqual(true);
   });

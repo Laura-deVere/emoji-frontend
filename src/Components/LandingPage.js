@@ -24,7 +24,7 @@ const LandingPage = () => {
                 </div>
             </section>
             <section className="centered--main--section">
-                <button className="button--get_started">Get started</button>
+                <button data-test="getStartedButton" className="button--get_started">Get started</button>
             </section>
         </div>
     )
