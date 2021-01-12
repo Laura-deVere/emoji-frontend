@@ -19,14 +19,14 @@ describe('App', () => {
   });
   test('App should render `Nav` component', () => {
     const component = wrapper.find(Nav);
-    expect(component.length).toBe(0);
+    expect(component.length).toBe(1);
   });
   test('App should render `Landing page` component', () => {
     const component = wrapper.find(LandingPage);
-    expect(component.length).toBe(0);
+    expect(component.length).toBe(1);
   });
   test('App should render `Footer` component', () => {
     const component = wrapper.find(Footer);
-    expect(component.length).toBe(0);
+    expect(component.length).toBe(1);
   });
 })
