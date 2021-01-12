@@ -15,18 +15,15 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('App', () => {
   const wrapper = shallow(<App />);
   test('should render the app component', () => {
-    expect(wrapper.length).toBe(1);
+    expect(wrapper.find('div').length).toEqual(1);
   });
   test('App should render `Nav` component', () => {
-    const component = wrapper.find(Nav);
-    expect(component.length).toBe(1);
+    expect(wrapper.containsMatchingElement(<Nav />)).toEqual(true);
   });
   test('App should render `Landing page` component', () => {
-    const component = wrapper.find(LandingPage);
-    expect(component.length).toBe(1);
+    expect(wrapper.containsMatchingElement(<LandingPage />)).toEqual(true);
   });
   test('App should render `Footer` component', () => {
-    const component = wrapper.find(Footer);
-    expect(component.length).toBe(1);
+    expect(wrapper.containsMatchingElement(<Footer />)).toEqual(true);
   });
 })
