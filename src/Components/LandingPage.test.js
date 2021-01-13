@@ -14,4 +14,15 @@ describe('Landing Page', () => {
         const button = wrapper.find(`[data-test="getStartedButton"]`);
         expect(button.length).toBe(1);
     });
+
+    // test('On `Get started` button click modal view state should update', () => {
+    //     const mockSetShowModal = jest.fn();
+    //     // React.useState = jest.fn(() => [true, mockSetShowModal]);
+
+    //     const button = wrapper.find(`[data-test="getStartedButton"]`);
+
+    //     button.simulate('click');
+    //     expect(mockSetShowModal).toBeInstanceOf(Function);
+    //     // expect(mockSetShowModal).toHaveBeenCalled();
+    // })
 });

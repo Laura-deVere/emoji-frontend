@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 const LandingPage = () => {
+    const [modal, setShowModal] = useState(false);
+    // should render sign in modal on click by updating state
+
+    // const clickFunction = () => {
+    //     console.log()
+    // }
+
     return (
         <div>
             <header className="centered--main--section header--main">
@@ -24,7 +33,10 @@ const LandingPage = () => {
                 </div>
             </section>
             <section className="centered--main--section">
-                <button data-test="getStartedButton" className="button--get_started">Get started</button>
+                <button
+                    data-test="getStartedButton" className="button--get_started"
+                    onClick={() => setShowModal(true)}
+                >Get started</button>
             </section>
         </div>
     )
