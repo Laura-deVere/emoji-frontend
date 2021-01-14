@@ -1,0 +1,27 @@
+@import "../../sass/variables.scss";
+
+.form__signup {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    opacity: 1;
+    color: $dark;
+    border-radius: 5px;
+    span, a, button {
+        margin-top: 12px;
+        display: inline-block;
+    }
+}
+
+.form__signup__emoji {
+    background-color: $turquoise;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    font-size: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
