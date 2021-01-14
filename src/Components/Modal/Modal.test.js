@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 //Component 
 import Modal from './Modal';
-import SignUp from './SignUp';
+import SignUp from '../SignUp';
 
 Enzyme.configure({ adapter: new Adapter() });
 

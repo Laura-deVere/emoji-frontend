@@ -1,13 +1,9 @@
 import { useState } from "react";
+import Modal from "./Modal/Modal";
 
 const LandingPage = () => {
-    const [modal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     // should render sign in modal on click by updating state
-
-    // const clickFunction = () => {
-    //     console.log()
-    // }
-
     return (
         <div>
             <header className="centered--main--section header--main">
@@ -38,6 +34,7 @@ const LandingPage = () => {
                     onClick={() => setShowModal(true)}
                 >Get started</button>
             </section>
+            <Modal isVisible={showModal} updateModalVisibility={setShowModal} />
         </div>
     )
 }
