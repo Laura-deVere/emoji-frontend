@@ -1,10 +1,10 @@
-import { form__signup, form__signup__emoji } from './Signup.module.scss';
-import { form__input__column, form__button_primary } from '../../sass/Forms.module.scss';
+import { form__signup } from './Signup.module.scss';
+import { form__input__column, form__button_primary, form__logo__emoji } from '../../sass/Forms.module.scss';
 
-const SignUp = () => {
+const SignUp = ({ toggleForm }) => {
     return (
         <div className={form__signup}>
-            <div className={form__signup__emoji}>
+            <div className={form__logo__emoji}>
                 <span>😁</span>
             </div>
             <form>
@@ -29,12 +29,15 @@ const SignUp = () => {
                     <input />
                 </div>
                 <div className={form__input__column}>
-                    <button type="submit" className={form__button_primary} >Sign Up</button>
+                    <button
+                        type="submit"
+                        className={form__button_primary}
+                    >Sign Up</button>
                 </div>
             </form>
             <div>
                 <span>Already have an account?</span>
-                <a href="#">Sign In</a>
+                <span onClick={() => toggleForm(!false)}>Sign In</span>
             </div>
         </div>
     )

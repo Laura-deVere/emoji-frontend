@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn';
 
 import {
     modal,
@@ -10,6 +13,7 @@ import {
 } from './Modal.module.scss';
 
 const Modal = ({ isVisible, updateModalVisibility }) => {
+    const [form, setForm] = useState(false);
     return (
         <div className={`${modal} ${isVisible ? modal__visible : modal__hidden}`}>
             <div className={modal__background}></div>
@@ -19,7 +23,7 @@ const Modal = ({ isVisible, updateModalVisibility }) => {
                     className={modal__close}
                     onClick={() => { updateModalVisibility(false) }}
                 >X</button>
-                <SignUp />
+                {!form ? <SignUp toggleForm={setForm} /> : <SignIn toggleForm={setForm} />}
             </div>
         </div>
     )
