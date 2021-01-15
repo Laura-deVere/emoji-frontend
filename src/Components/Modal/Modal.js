@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn';
+import CancelButton from '../Buttons/CancelButton';
 
 import {
     modal,
@@ -18,15 +20,16 @@ const Modal = ({ isVisible, updateModalVisibility }) => {
         <div className={`${modal} ${isVisible ? modal__visible : modal__hidden}`}>
             <div className={modal__background}></div>
             <div className={modal__form_container}>
-                <button
-                    data-test="cancel-button"
-                    className={modal__close}
-                    onClick={() => { updateModalVisibility(false) }}
-                >X</button>
+                <CancelButton updateModalVisibility={updateModalVisibility} />
                 {!form ? <SignUp toggleForm={setForm} /> : <SignIn toggleForm={setForm} />}
             </div>
         </div>
     )
+}
+
+Modal.propTypes = {
+    isVisible: PropTypes.bool.isRequired,
+    updateModalVisibility: PropTypes.func.isRequired
 }
 
 export default Modal;

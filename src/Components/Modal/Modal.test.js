@@ -4,21 +4,29 @@ import Adapter from 'enzyme-adapter-react-16';
 
 //Component 
 import Modal from './Modal';
-import SignUp from '../SignUp';
+import SignUp from '../SignUp/SignUp';
+import CancelButton from '../Buttons/CancelButton';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Modal', () => {
-    const wrapper = shallow(<Modal />);
+    let wrapper;
+    beforeEach(() => {
+        wrapper = shallow(
+            <Modal
+                isVisible={true}
+                updateModalVisibility={jest.fn()}
+            />
+        );
+    });
     test('Modal should render `div`', () => {
         const modal = wrapper.find('div');
-        expect(modal.length).toBe(1)
+        expect(modal.length).toBe(3)
     });
     test('Modal should render `Sign Up` form', () => {
         expect(wrapper.containsMatchingElement(<SignUp />)).toEqual(true);
     });
     test('Modal should render `cancel` button', () => {
-        const button = wrapper.find('[data-test="cancel-button"]');
-        expect(button.length).toBe(1);
+        expect(wrapper.containsMatchingElement(<CancelButton updateModalVisibility={jest.fn()} />)).toEqual(false);
     });
 });
