@@ -9,24 +9,24 @@ const SignUp = ({ toggleForm }) => {
             </div>
             <form>
                 <div className={form__input__column}>
-                    <label>First Name</label>
-                    <input />
+                    <label htmlFor="firstName">First Name</label>
+                    <input id="firstName" type="text" name="firstName" />
                 </div>
                 <div className={form__input__column}>
-                    <label>Last Name</label>
-                    <input />
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" />
                 </div>
                 <div className={form__input__column}>
-                    <label>Email</label>
-                    <input />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" id="email" />
                 </div>
                 <div className={form__input__column}>
-                    <label>Password</label>
-                    <input />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" />
                 </div>
                 <div className={form__input__column}>
-                    <label>Password Confirmation</label>
-                    <input />
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" />
                 </div>
                 <div className={form__input__column}>
                     <button
@@ -37,7 +37,7 @@ const SignUp = ({ toggleForm }) => {
             </form>
             <div>
                 <span>Already have an account?</span>
-                <span onClick={() => toggleForm(!false)}>Sign In</span>
+                <span role="link" onClick={() => toggleForm(!false)}>Sign In</span>
             </div>
         </div>
     )
