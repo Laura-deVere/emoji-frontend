@@ -1,9 +1,10 @@
 import React from 'react';
-import { screen, render, getByRole, getByLabelText } from "@testing-library/react";
+import { act, screen, render, getByRole, getByLabelText, fireEvent, getByTestId, getByText } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import SignUp from './SignUp';
 
+// React Testing Library renders our components, replicating the DOM that the end - user will see.It then provides utility methods to interact with this DOM
 describe('Signup', () => {
     test('Should render input fields', () => {
         // mounts the component
@@ -33,5 +34,40 @@ describe('Signup', () => {
         expect(
             screen.getByRole('link', { name: /Sign In/i })
         ).toBeInTheDocument();
+    });
+    describe('Sign Up form behaviour', () => {
+        test('validates user inputs and displays an error message', async () => {
+            const { getByText, getByTestId } = render(<SignUp />);
+
+            // act - All it does is forward all arguments to the act function
+            await act(async () => {
+                fireEvent.submit(getByTestId('signup-form'));
+            });
+
+            expect(getByText('First name is required.')).toBeInTheDocument();
+            expect(getByText('Email is required.')).toBeInTheDocument();
+            expect(getByText('Password is required.')).toBeInTheDocument();
+            expect(getByText('Password confirmation is required.')).toBeInTheDocument();
+        });
+        test('Validates user input and submits form with no errors', async () => {
+            // const { getByText } = render(<SignUp />);
+
+            // const formProps = {
+            //     firstName: "Shmaura",
+            //     lastName: "Shmopkins",
+            //     email: "laura@laura.com",
+            //     password: "12345678",
+            //     confirmPassword: "12345678"
+            // }
+
+            // await act(async () => {
+            //     fireEvent.click(getByText('Sign Up'), { target: formProps })
+            // });
+
+            // expect(getByText('First name is required.')).not.toBeInTheDocument();
+            // expect(getByText('Email is required.')).not.toBeInTheDocument();
+            // expect(getByText('Password is required.')).not.toBeInTheDocument();
+            // expect(getByText('Password confirmation is required.')).not.toBeInTheDocument();
+        });
     });
 });
