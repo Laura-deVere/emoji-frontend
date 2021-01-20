@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, screen, render, fireEvent } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import "@testing-library/jest-dom";
 
 import SignIn from './SignIn';

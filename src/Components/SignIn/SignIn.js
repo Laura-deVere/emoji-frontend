@@ -5,12 +5,17 @@ import { form__signin } from './SignIn.module.scss';
 import { form__logo__emoji } from '../../sass/Forms.module.scss';
 
 const SignUp = ({ toggleForm }) => {
+
+    const handlePostRequest = (data) => {
+        console.log(data)
+    }
+
     return (
         <div className={form__signin}>
             <div className={form__logo__emoji}>
                 <span>🥳</span>
             </div>
-            <Form />
+            <Form handleFormSubmit={handlePostRequest} />
             <div>
                 <span>Forgot to sign up?</span>
                 <button
