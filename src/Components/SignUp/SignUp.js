@@ -1,9 +1,25 @@
 import { useForm } from 'react-hook-form';
 import { form__signup } from './Signup.module.scss';
 import { form__input__column, form__button_primary, form__logo__emoji } from '../../sass/Forms.module.scss';
+import { useState } from 'react';
 
+// Break this into two Files, one functionality and one form
 const SignUp = ({ toggleForm }) => {
+    const defaultValues = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    }
+    const [formDetails, setFormDetails] = useState(defaultValues);
     const { register, handleSubmit, errors } = useForm();
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormDetails({ ...formDetails, [name]: value });
+        console.log(formDetails);
+    }
 
     const onSubmit = (data) => {
         console.log(data);
@@ -19,6 +35,8 @@ const SignUp = ({ toggleForm }) => {
                     <label htmlFor="firstName">First Name</label>
                     <input
                         id="firstName" type="text" name="firstName"
+                        defaultValue={formDetails.firstName}
+                        onChange={handleChange}
                         ref={register({
                             required: true,
                             pattern: /^[a-zA-Z]*$/
@@ -34,6 +52,8 @@ const SignUp = ({ toggleForm }) => {
                     <label htmlFor="lastName">Last Name</label>
                     <input
                         type="text" name="lastName" id="lastName"
+                        defaultValue={formDetails.lastName}
+                        onChange={handleChange}
                         ref={register({
                             required: false,
                             pattern: /^[a-zA-Z]*$/
@@ -46,6 +66,8 @@ const SignUp = ({ toggleForm }) => {
                     <label htmlFor="email">Email</label>
                     <input
                         type="email" name="email" id="email"
+                        defaultValue={formDetails.email}
+                        onChange={handleChange}
                         ref={register({
                             required: true,
                             pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
@@ -61,6 +83,8 @@ const SignUp = ({ toggleForm }) => {
                     <label htmlFor="password">Password</label>
                     <input
                         type="password" name="password" id="password"
+                        defaultValue={formDetails.password}
+                        onChange={handleChange}
                         ref={register({ required: true, minLength: 8 })} />
                     {errors.password && errors.password.type === "required" && (
                         <p className={null}>Password is required.</p>
@@ -72,9 +96,11 @@ const SignUp = ({ toggleForm }) => {
                     )}
                 </div>
                 <div className={form__input__column}>
-                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <label htmlFor="confirmPassword">Confirm</label>
                     <input
                         type="password" name="confirmPassword" id="confirmPassword"
+                        defaultValue={formDetails.confirmPassword}
+                        onChange={handleChange}
                         ref={register({ required: true, minLength: 8, match: 'password' })} />
                     {errors.password && errors.password.type === "required" && (
                         <p className={null}>Password confirmation is required.</p>

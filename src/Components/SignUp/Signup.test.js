@@ -26,7 +26,7 @@ describe('Signup', () => {
             screen.getByLabelText('Password', { selector: 'input' })
         ).toBeInTheDocument();
         expect(
-            screen.getByLabelText('Confirm Password', { selector: 'input' })
+            screen.getByLabelText('Confirm', { selector: 'input' })
         ).toBeInTheDocument();
         expect(
             screen.getByRole('button', { name: /Sign Up/i })
@@ -50,24 +50,40 @@ describe('Signup', () => {
             expect(getByText('Password confirmation is required.')).toBeInTheDocument();
         });
         test('Validates user input and submits form with no errors', async () => {
-            // const { getByText } = render(<SignUp />);
+            const { getByTestId, queryByText } = render(<SignUp />);
 
-            // const formProps = {
-            //     firstName: "Shmaura",
-            //     lastName: "Shmopkins",
-            //     email: "laura@laura.com",
-            //     password: "12345678",
-            //     confirmPassword: "12345678"
-            // }
+            const formProps = {
+                firstName: "Shmaura",
+                lastName: "Shmopkins",
+                email: "laura@laura.com",
+                password: "12345678",
+                confirmPassword: "12345678"
+            }
 
-            // await act(async () => {
-            //     fireEvent.click(getByText('Sign Up'), { target: formProps })
-            // });
+            await act(async () => {
+                fireEvent.change(screen.getByLabelText(/First Name/i), {
+                    target: { value: formProps.firstName }
+                });
+                fireEvent.change(screen.getByLabelText(/Email/i), {
+                    target: { value: formProps.email }
+                });
+                fireEvent.change(screen.getByLabelText(/Password/i), {
+                    target: { value: formProps.password }
+                });
+                fireEvent.change(screen.getByLabelText(/Confirm/i), {
+                    target: { value: formProps.confirmPassword }
+                });
+            });
 
-            // expect(getByText('First name is required.')).not.toBeInTheDocument();
-            // expect(getByText('Email is required.')).not.toBeInTheDocument();
-            // expect(getByText('Password is required.')).not.toBeInTheDocument();
-            // expect(getByText('Password confirmation is required.')).not.toBeInTheDocument();
+            await act(async () => {
+                fireEvent.click(getByTestId('signup-form'));
+            });
+
+            // getBy will throw an error if it doesn't find what it's looking for, where queryBy will return null if it can't find what its looking for. This way the tests can continue without error.
+            expect(queryByText('First name is required.')).not.toBeInTheDocument();
+            expect(queryByText('Email is required.')).not.toBeInTheDocument();
+            expect(queryByText('Password is required.')).not.toBeInTheDocument();
+            expect(queryByText('Password confirmation is required.')).not.toBeInTheDocument();
         });
     });
 });
