@@ -9,7 +9,6 @@ import {
     modal,
     modal__hidden,
     modal__visible,
-    modal__close,
     modal__background,
     modal__form_container
 } from './Modal.module.scss';

@@ -1,5 +1,8 @@
+import PropTypes from 'prop-types';
+import Form from './Form';
+
 import { form__signin } from './SignIn.module.scss';
-import { form__input__column, form__button_primary, form__logo__emoji } from '../../sass/Forms.module.scss';
+import { form__logo__emoji } from '../../sass/Forms.module.scss';
 
 const SignUp = ({ toggleForm }) => {
     return (
@@ -7,27 +10,19 @@ const SignUp = ({ toggleForm }) => {
             <div className={form__logo__emoji}>
                 <span>🥳</span>
             </div>
-            <form>
-                <div className={form__input__column}>
-                    <label>Email</label>
-                    <input />
-                </div>
-                <div className={form__input__column}>
-                    <label>Password</label>
-                    <input />
-                </div>
-                <div className={form__input__column}>
-                    <button
-                        type="submit"
-                        className={form__button_primary}>Sign In</button>
-                </div>
-            </form>
+            <Form />
             <div>
                 <span>Forgot to sign up?</span>
-                <span onClick={() => toggleForm(!true)}>Sign Up</span>
+                <button
+                    onClick={() => toggleForm(!true)}>Sign Up
+                </button>
             </div>
         </div>
     )
+}
+
+SignUp.propTypes = {
+    toggleForm: PropTypes.func.isRequired
 }
 
 export default SignUp;
