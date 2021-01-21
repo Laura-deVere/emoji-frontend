@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { signUp } from '../../actions'
+
 import { form__signup } from './Signup.module.scss';
 import { form__input__column, form__button_primary, form__logo__emoji } from '../../sass/Forms.module.scss';
-import { useState } from 'react';
 
 // Break this into two Files, one functionality and one form
-const SignUp = ({ toggleForm }) => {
+const SignUp = ({ toggleForm, signUp }) => {
     const defaultValues = {
         firstName: "",
         lastName: "",
@@ -18,11 +22,21 @@ const SignUp = ({ toggleForm }) => {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormDetails({ ...formDetails, [name]: value });
-        console.log(formDetails);
     }
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const resetFormData = () => {
+        setFormDetails(defaultValues);
+    }
+
+    const onSubmit = async (data) => {
+        const newUser = data;
+        const success = await signUp(newUser);
+        if (success) {
+            resetFormData();
+            toggleForm(!false);
+        } else {
+            console.log('something went wrong!');
+        }
     }
 
     return (
@@ -126,4 +140,9 @@ const SignUp = ({ toggleForm }) => {
     )
 }
 
-export default SignUp;
+SignUp.propTypes = {
+    toggleForm: PropTypes.func.isRequired,
+    signUp: PropTypes.func.isRequired
+}
+
+export default connect(null, { signUp })(SignUp);
