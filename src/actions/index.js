@@ -1,4 +1,5 @@
 import axios from '../apis/user';
+import { ERRORS } from './types';
 // import {
 //     ERRORS,
 //     SET_CURRENT_USER
@@ -29,6 +30,10 @@ export const signUp = (userData) => async (dispatch) => {
         })
         .catch((err) => {
             ///dispatch error action
+            dispatch({
+                type: ERRORS,
+                payload: err
+            })
             return false;
         });
 }

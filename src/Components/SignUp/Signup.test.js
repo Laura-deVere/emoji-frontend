@@ -1,14 +1,23 @@
 import React from 'react';
 import { act, screen, render, getByRole, getByLabelText, fireEvent, getByTestId, getByText } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { storeFactory } from '../../test/testUtils';
 
 import SignUp from './SignUp';
 
 // React Testing Library renders our components, replicating the DOM that the end - user will see.It then provides utility methods to interact with this DOM
 describe('Signup', () => {
+    let store;
+    beforeEach(() => {
+        // because this component is connect to the redux store
+        const initialState = {};
+        store = storeFactory(initialState);
+    });
+
     test('Should render input fields', () => {
         // mounts the component
-        render(<SignUp />);
+        render(<SignUp store={store} toggleForm={() => { }} signUp={() => { }
+        } />);
 
         // Using getByRole is preferable when testing dom elements, it ensures your app is accessible to everyone
         expect(
@@ -37,7 +46,8 @@ describe('Signup', () => {
     });
     describe('Sign Up form behaviour', () => {
         test('validates user inputs and displays an error message', async () => {
-            const { getByText, getByTestId } = render(<SignUp />);
+            const { getByText, getByTestId } = render(<SignUp store={store} toggleForm={() => { }} signUp={() => { }
+            } />);
 
             // act - All it does is forward all arguments to the act function
             await act(async () => {
@@ -50,7 +60,8 @@ describe('Signup', () => {
             expect(getByText('Password confirmation is required.')).toBeInTheDocument();
         });
         test('Validates user input and submits form with no errors', async () => {
-            const { getByTestId, queryByText } = render(<SignUp />);
+            const { getByTestId, queryByText } = render(<SignUp store={store} toggleForm={() => { }} signUp={() => { }
+            } />);
 
             const formProps = {
                 firstName: "Shmaura",
