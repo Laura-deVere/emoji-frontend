@@ -1,4 +1,7 @@
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { signIn } from '../../actions';
+
 import Form from './Form';
 
 import { form__signin } from './SignIn.module.scss';
@@ -30,4 +33,4 @@ SignUp.propTypes = {
     toggleForm: PropTypes.func.isRequired
 }
 
-export default SignUp;
+export default connect(null, { signIn })(SignUp);

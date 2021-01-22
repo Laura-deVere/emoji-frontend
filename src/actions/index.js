@@ -37,3 +37,7 @@ export const signUp = (userData) => async (dispatch) => {
             return false;
         });
 }
+
+export const signIn = (user) => async (dispatch) => {
+
+}
