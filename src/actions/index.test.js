@@ -11,6 +11,9 @@ const store = mockStore({});
 const mockSuccess = data => ({ status: 200, response: { data } });
 const mockError = error => ({ status: 500, response: error });
 
+
+// All I'm checking is the correction action has been called and it returned the correct action
+
 describe('signIn action creator', () => {
 
     beforeEach(() => {
