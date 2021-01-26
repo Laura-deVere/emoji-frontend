@@ -1,9 +1,10 @@
 import axios from '../apis/user';
-import { ERRORS } from './types';
-// import {
-//     ERRORS,
-//     SET_CURRENT_USER
-// } from './types';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../utils/setAuthToken';
+import {
+    ERRORS,
+    SET_CURRENT_USER
+} from './types';
 
 export const signUp = (userData) => async (dispatch) => {
 
@@ -22,6 +23,7 @@ export const signUp = (userData) => async (dispatch) => {
             password_confirmation: userData.confirmPassword
         }
     }
+
     return await axios(options)
         .then((res) => {
             // return a success response and redirect to login
@@ -40,4 +42,50 @@ export const signUp = (userData) => async (dispatch) => {
 
 export const signIn = (user) => async (dispatch) => {
 
+    const options = {
+        method: 'POST',
+        url: '/signin',
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: {
+            email: user.email,
+            password: user.password
+        }
+    }
+
+    return await axios(options)
+        .then(res => {
+
+            const { token } = res.data;
+            localStorage.setItem('jwtToken', token);
+
+            // Set token to Auth header
+            setAuthToken(token);
+
+            // Decode token to get user data
+            const decoded = jwt_decode(token);
+
+            // Dispatch set user action
+            setUser(decoded);
+
+        })
+        .catch(err => {
+            setError(err)
+        });
+}
+
+export const setError = (err) => {
+    return {
+        type: ERRORS,
+        payload: err
+    }
+}
+
+export const setUser = (user) => {
+    return {
+        type: SET_CURRENT_USER,
+        payload: user
+    }
 }
