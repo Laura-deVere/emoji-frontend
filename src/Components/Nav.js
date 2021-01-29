@@ -1,6 +1,13 @@
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 const Nav = () => {
+    const history = useHistory();
+
     return (
-        <nav></nav>
+        <nav>
+            <button onClick={() => history.push("/")}>home</button>
+        </nav>
     )
 }
 

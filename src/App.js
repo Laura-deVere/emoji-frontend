@@ -1,8 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
-  useHistory
+  useHistory,
+  Redirect
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -18,7 +20,7 @@ export const App = ({ currentUser }) => {
   useEffect(() => {
     // if is User Logged In turned to true redirect to /user
     if (currentUser) {
-      history.push("/home");
+      history.push("/dashboard");
     }
   }, [currentUser]);
 
@@ -27,11 +29,12 @@ export const App = ({ currentUser }) => {
     <div className="App">
       <Nav />
       <Switch>
-        <Route path="/home">
+        <Route exact path="/dashboard">
           <CurrentUser />
         </Route>
-        <Route path="/">
-          <LandingPage />
+        <Route exact path="/">
+          {currentUser ? <Redirect to="/dashboard" /> : <LandingPage />}
+          {/* <LandingPage /> */}
         </Route>
       </Switch>
       <Footer />
@@ -40,8 +43,12 @@ export const App = ({ currentUser }) => {
   )
 }
 
+App.propTypes = {
+  currentUser: PropTypes.bool.isRequired
+}
+
 const mapStateToProps = state => {
-  console.log(state);
+  // console.log(state);
   return { currentUser: state.auth.isAuthenticated }
 }
 

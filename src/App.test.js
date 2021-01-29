@@ -24,11 +24,15 @@ const setup = (state = {}) => {
 describe('App render with correct components with no current user', () => {
 
   const isNotAuthenticated = {
-    currentUser: false
+    // currentUser: false
+    auth: {
+      isAuthenticated: false,
+      user: null
+    },
+    error: {}
   }
 
   const wrapper = setup(isNotAuthenticated);
-  // console.log(wrapper.debug())
 
   test('should render the app component', () => {
     expect(wrapper.find('div').length).toEqual(1);
@@ -45,15 +49,6 @@ describe('App render with correct components with no current user', () => {
   });
   test('App should not render Current User component', () => {
     expect(wrapper.find(<CurrentUser />)).toHaveLength(0);
+    // expect(wrapper.containsMatchingElement(<CurrentUser />)).toEqual(false);
   });
-});
-
-test('App renders current user profile on user sign in success', () => {
-  const isAuthenticated = {
-    currentUser: true
-  }
-  const wrapper = setup(isAuthenticated);
-  console.log(wrapper.debug());
-
-  expect(wrapper.find(<CurrentUser />)).toHaveLength(1);
 });

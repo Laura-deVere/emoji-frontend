@@ -1,6 +1,6 @@
 
 const CurrentUser = () => {
-    return <div>User</div>
+    return <div><h1>User</h1></div>
 }
 
 export default CurrentUser;
