@@ -41,7 +41,7 @@ export const signUp = (userData) => async (dispatch) => {
 }
 
 export const signIn = (user) => async (dispatch) => {
-
+    console.log(user)
     const options = {
         method: 'POST',
         url: '/signin',
@@ -66,9 +66,9 @@ export const signIn = (user) => async (dispatch) => {
 
             // Decode token to get user data
             const decoded = jwt_decode(token);
-
+            console.log(res);
             // Dispatch set user action
-            setUser(decoded);
+            dispatch(setUser(decoded));
 
         })
         .catch(err => {

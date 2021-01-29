@@ -13,7 +13,7 @@ export const checkProps = (component, expectedProps) => {
     return propsErr;
 };
 
-// Creating a test store with imported reducers, middleware, and initial state. Use to test async action creator later
+// Creating a test store with imported app reducers, middleware, and initial state. Use to test async action creator later
 export const storeFactory = (initialState) => {
     const middlewares = [ReduxThunk];
     const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);

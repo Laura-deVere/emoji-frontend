@@ -1,19 +1,35 @@
 import React from 'react';
-// import { render, screen } from '@testing-library/react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { storeFactory } from "./test/testUtils";
 
 // Component
 import App from './App';
 import LandingPage from './Components/LandingPage';
+import CurrentUser from './Components/User/CurrentUser';
 import Nav from './Components/Nav';
 import Footer from './Components/Footer';
 
 // Configure enzyme for react 16
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('App', () => {
-  const wrapper = shallow(<App />);
+// Mock Store
+const setup = (state = {}) => {
+  const store = storeFactory(state);
+  // .dive returns the react chikd component of shallow wrapper
+  const wrapper = shallow(<App store={store} />).dive().dive();
+  return wrapper;
+}
+
+describe('App render with correct components with no current user', () => {
+
+  const isNotAuthenticated = {
+    currentUser: false
+  }
+
+  const wrapper = setup(isNotAuthenticated);
+  // console.log(wrapper.debug())
+
   test('should render the app component', () => {
     expect(wrapper.find('div').length).toEqual(1);
   });
@@ -27,4 +43,17 @@ describe('App', () => {
   test('App should render `Footer` component', () => {
     expect(wrapper.containsMatchingElement(<Footer />)).toEqual(true);
   });
-})
+  test('App should not render Current User component', () => {
+    expect(wrapper.find(<CurrentUser />)).toHaveLength(0);
+  });
+});
+
+test('App renders current user profile on user sign in success', () => {
+  const isAuthenticated = {
+    currentUser: true
+  }
+  const wrapper = setup(isAuthenticated);
+  console.log(wrapper.debug());
+
+  expect(wrapper.find(<CurrentUser />)).toHaveLength(1);
+});

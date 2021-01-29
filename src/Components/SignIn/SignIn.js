@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn } from '../../actions';
 
@@ -7,10 +8,10 @@ import Form from './Form';
 import { form__signin } from './SignIn.module.scss';
 import { form__logo__emoji } from '../../sass/Forms.module.scss';
 
-const SignUp = ({ toggleForm }) => {
+const SignIn = ({ toggleForm, signIn }) => {
 
-    const handlePostRequest = (data) => {
-        console.log(data)
+    const handlePostRequest = (user) => {
+        signIn(user);
     }
 
     return (
@@ -29,8 +30,9 @@ const SignUp = ({ toggleForm }) => {
     )
 }
 
-SignUp.propTypes = {
-    toggleForm: PropTypes.func.isRequired
+SignIn.propTypes = {
+    toggleForm: PropTypes.func.isRequired,
+    signIn: PropTypes.func.isRequired
 }
 
-export default connect(null, { signIn })(SignUp);
+export default connect(null, { signIn })(SignIn);
