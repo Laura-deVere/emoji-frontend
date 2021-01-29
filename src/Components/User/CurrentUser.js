@@ -1,6 +1,13 @@
+import AddEmojiButton from './AddEmojiButton';
+import Header from './Header';
 
 const CurrentUser = () => {
-    return <div><h1>User</h1></div>
+    return (
+        <div>
+            <Header />
+            <AddEmojiButton />
+        </div>
+    )
 }
 
 export default CurrentUser;
