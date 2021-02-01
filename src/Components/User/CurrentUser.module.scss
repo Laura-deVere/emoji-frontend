@@ -1,0 +1,14 @@
+@import "../../sass/variables.scss";
+
+.header {
+    background-color: $dark;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+}
