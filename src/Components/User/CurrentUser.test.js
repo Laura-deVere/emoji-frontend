@@ -6,6 +6,7 @@ import { storeFactory } from '../../test/testUtils';
 import CurrentUser from './CurrentUser';
 import Header from './Header';
 import AddEmojiButton from './AddEmojiButton';
+import EmojisList from '../Emojis/List';
 
 // Configure enzyme for react 16
 Enzyme.configure({ adapter: new Adapter() });
@@ -44,5 +45,9 @@ describe('Current user page', () => {
     test('renders `Add new emoji button`', () => {
         expect(wrapper.containsMatchingElement(<AddEmojiButton />)).toEqual(true);
     });
+
+    test('Renders Emoji list component', () => {
+        expect(wrapper.containsMatchingElement(<EmojisList />)).toEqual(true);
+    })
 
 });
