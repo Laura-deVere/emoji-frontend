@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { findByTestAttr } from '../../test/testUtils';
 
@@ -17,12 +17,12 @@ const emoji = {
 }
 
 describe('Emoji list item', () => {
-    const wrapper = shallow(<ListItem emoji={emoji} />);
+    // I used render so I could access the innerHTML text
+    const wrapper = render(<ListItem emoji={emoji} />);
 
     test('List item component renders emoji in li', () => {
         const listElement = findByTestAttr(wrapper, "emoji-list-item");
-        // console.log(wrapper)
-        expect(listElement.length).toBe(1);
+        expect(listElement.children.length).toBe(1);
     });
 
     test('List item should render div', () => {
@@ -35,8 +35,8 @@ describe('Emoji list item', () => {
         expect(name.text()).toEqual("grinning squinting face");
     });
 
-    test('List item should render `span` with emoji', () => {
+    test('List item should render div with a function to call test emoji string', () => {
         const emojiCode = findByTestAttr(wrapper, "emoji-code");
-        expect(emojiCode.text()).toEqual("&#x1F606;");
+        expect(emojiCode.text()).toBe('😆');
     });
 })
