@@ -1,7 +1,7 @@
-import { render } from 'enzyme';
-import PropTypes from 'prop-types';
 import { emojis } from './emojis';
 import ListItem from './ListItem';
+
+import { list } from './EmojiList.module.scss';
 
 const List = () => {
 
@@ -11,11 +11,9 @@ const List = () => {
         });
     }
     return (
-        <div>
-            <ul>
-                {renderList(emojis)}
-            </ul>
-        </div>
+        <ul className={list}>
+            {renderList(emojis)}
+        </ul>
     )
 }
 

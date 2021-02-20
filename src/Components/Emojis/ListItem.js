@@ -16,9 +16,10 @@ const ListItem = ({ emoji }) => {
 
     return (
         <li data-test="emoji-list-item">
-            <div data-test="emoji-container">
-                <p data-test="emoji-name">{unicodeName}</p>
-                <div data-test="emoji-code" dangerouslySetInnerHTML={testString(codePoint)}></div>
+            <div className="tooltip" data-test="emoji-container">
+                <button data-test="emoji-code" dangerouslySetInnerHTML={testString(codePoint)}>
+                </button>
+                <span className="tooltiptext" data-test="emoji-name">{unicodeName}</span>
             </div>
         </li>
     )
